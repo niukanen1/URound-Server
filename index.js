@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 4000;
 
 const app = express();
 
-const apolloServer = new ApolloServer({ schema, pugins: [] });
+const apolloServer = new ApolloServer({ schema, pugins: [], introspection: true });
 
 (async () => {
 	await apolloServer.start();
