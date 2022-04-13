@@ -37,7 +37,7 @@ function () {
     value: function handleError(error) {
       this.responseBody.message.description = error.message;
       this.responseBody.message.isError = true;
-      this.responseBody.userInfo = {};
+      this.responseBody.userInfo = null;
     }
   }, {
     key: "setUser",

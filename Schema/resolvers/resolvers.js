@@ -1,4 +1,4 @@
-const {getAllUsers, addUser, getUserbyEmail} = require("./User/UserResolver");
+const {getAllUsers, addUser, getUserbyEmail, login} = require("./User/UserResolver");
 
 const resolvers = {
 	Query: {
@@ -8,6 +8,9 @@ const resolvers = {
         getUserByEmail: async (_, {email}) => { 
             return await getUserbyEmail(email)
         }, 
+        login: async (_, {email, password}) => { 
+            return await login(email, password)
+        }
 	},
 	Mutation: {
 		addUser: async (root, { User }) => { 

@@ -11,10 +11,21 @@ const UserType = gql`
         isError: Boolean!
         description: String
     }
-    type Response { 
+
+    
+    interface Response { 
+        message: Message! 
+    }
+    type BasicResponse implements Response { 
         message: Message! 
         userInfo: User
     }
+    type LoginResponse implements Response { 
+        message: Message! 
+        isLoggedIn: Boolean!
+    }
+
+
     input UserInput { 
         email: String!
         password: String!
@@ -22,11 +33,12 @@ const UserType = gql`
         lastName: String
     }
     type Mutation { 
-        addUser(User: UserInput!): Response!
+        addUser(User: UserInput!): BasicResponse!
     }
     type Query {
 		getAllUsers: [User!]!,
-        getUserByEmail(email: String!): Response! 
+        getUserByEmail(email: String!): BasicResponse!,
+        login(email: String!, password: String!): LoginResponse!
 	}
 `;
 
