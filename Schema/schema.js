@@ -6,7 +6,7 @@ const {UserType} = require("./types/UserType.js")
 
 const schema = makeExecutableSchema({ 
     typeDefs: [UserType], 
-    resolvers: [resolvers]
+    resolvers: [resolvers],
 })
 
 
