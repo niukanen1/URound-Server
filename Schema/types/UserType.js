@@ -29,8 +29,8 @@ const UserType = gql`
     input UserInput { 
         email: String!
         password: String!
-        firstName: String
-        lastName: String
+        firstName: String!
+        lastName: String!
     }
     type Mutation { 
         addUser(User: UserInput!): BasicResponse!
