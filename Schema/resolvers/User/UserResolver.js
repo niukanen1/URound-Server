@@ -32,32 +32,12 @@ class userDataResponse extends basicResponse {
 		this.responseBody.userInfo.hashedPassword = pass;
 	}
 }
-// class basicResponse {
-// 	constructor() {
-// 		this.responseBody = {
-// 			message: {
-// 				isError: false,
-// 				description: "OK",
-// 			},
-// 			userInfo: null,
-// 		};
-// 	}
-// 	handleError(error) {
-// 		this.responseBody.message.description = error.message;
-// 		this.responseBody.message.isError = true;
-// 		this.responseBody.userInfo = null;
-// 	}
-// 	setUser(newUser) {
-// 		this.responseBody.userInfo = newUser;
-// 	}
-// 	setUserHashPass(pass) {
-// 		this.responseBody.userInfo.hashedPassword = pass;
-// 	}
-// }
+
 class loginResponse extends basicResponse {
 	constructor() {
 		super(); 
         this.responseBody.isLoggedIn = false; 
+        this.responseBody.userInfo = {}; 
 	}
     handleError(error) { 
         super.handleError(error);
@@ -65,6 +45,9 @@ class loginResponse extends basicResponse {
     }
     setIsLoggedIn(value) { 
         this.responseBody.isLoggedIn = value; 
+    }
+    setUserInfo(user) { 
+        this.responseBody.userInfo = user
     }
 }
 
@@ -82,7 +65,7 @@ async function addUser(User) {
 		// checking if the user is in the database
 		const userCheck = await usersCollection.findOne({ email: User.email });
 		if (userCheck) {
-			throw new Error("Email already exists");
+			throw new Error("User with such email already exists");
 		}
 
 		// inserting the user into the database (if there is no such user yet)
@@ -132,7 +115,7 @@ async function login(email, password) {
             throw new Error("Wrong password");
         }
         response.setIsLoggedIn(true); 
-
+        response.setUserInfo(userToLogin);
 	} catch (err) {
         response.handleError(err);
     }
