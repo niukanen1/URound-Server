@@ -23,6 +23,7 @@ const UserType = gql`
     type LoginResponse implements Response { 
         message: Message! 
         isLoggedIn: Boolean!
+        userInfo: User
     }
 
 
