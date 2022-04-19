@@ -69,6 +69,7 @@ async function addUser(User) {
 		}
 
 		// inserting the user into the database (if there is no such user yet)
+        delete User.password; 
 		const newUser = {
 			...User,
 			hashedPassword: hashedPassword,
